@@ -10,10 +10,16 @@ def filter_digit(line: str) -> str:
     return "".join(filter(str.isdigit, line))
 
 
+def get_first_and_last(digit: str) -> int:
+    return int(digit[0] + digit[-1])
+
+
 def main():
     lines = get_puzzle_lines()
     digits = map(filter_digit, lines)
-    print(list(digits))
+    first_last = [get_first_and_last(digit) for digit in digits]
+    print(first_last)
+    print(sum(first_last))
 
 
 if __name__ == "__main__":
