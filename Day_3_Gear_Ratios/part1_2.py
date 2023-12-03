@@ -23,7 +23,7 @@ def get_special_chars(lines: list[str]) -> set[tuple[int, int]]:
 
 
 def get_edge_num(index: int, n: re.Match) -> set[tuple[int, int]]:
-    """given an line index and matched number, returns the content of char around num in a set"""
+    """given a line index and matched number, returns the content of char around num in a set"""
     return set(
         itertools.product(
             (index - 1, index, index + 1),
