@@ -12,6 +12,7 @@ def get_puzzle_lines() -> list[str]:
 
 
 def get_special_chars(lines: list[str]) -> set[tuple[int, int]]:
+    """returns the coordinate of all special characters inside the puzzle as a set"""
     num_lines = len(lines)
     length_line = len(lines[0])  # we assume all lines have same length
     return {
@@ -21,6 +22,16 @@ def get_special_chars(lines: list[str]) -> set[tuple[int, int]]:
     }
 
 
+def get_edge_num(index: int, n: re.Match) -> set[tuple[int, int]]:
+    """given an line index and matched number, returns the content of char around num in a set"""
+    return set(
+        itertools.product(
+            (index - 1, index, index + 1),
+            range(n.start() - 1, n.end() + 1),
+        ),
+    )
+
+
 def main() -> None:
     lines = get_puzzle_lines()
     parts = defaultdict(list)
@@ -28,11 +39,7 @@ def main() -> None:
 
     for index, line in enumerate(lines):
         for n in re.finditer(r"\d+", line):
-            edge = {
-                (r, c)
-                for r in (index - 1, index, index + 1)
-                for c in range(n.start() - 1, n.end() + 1)
-            }
+            edge = get_edge_num(index, n)
             for o in edge & special_chars:
                 parts[o].append(int(n.group(0)))
 
