@@ -16,7 +16,7 @@ def main():
     parts = defaultdict(list)
     special_chars = {
         (r, c)
-        for r, c in itertools.product(range(140), range(140))
+        for r, c in itertools.product(range(len(lines)), range(len(lines)))
         if lines[r][c] not in "01234566789."
     }
 
@@ -27,7 +27,6 @@ def main():
                 for r in (index - 1, index, index + 1)
                 for c in range(n.start() - 1, n.end() + 1)
             }
-            print(edge)
             for o in edge & special_chars:
                 parts[o].append(int(n.group(0)))
 
