@@ -11,14 +11,20 @@ def get_puzzle_lines() -> list[str]:
         return f.readlines()
 
 
-def main():
+def get_special_chars(lines: list[str]) -> set[tuple[int, int]]:
+    num_lines = len(lines)
+    length_line = len(lines[0])  # we assume all lines have same length
+    return {
+        (r, c)
+        for r, c in itertools.product(range(num_lines), range(length_line))
+        if lines[r][c] not in "01234566789.\n"
+    }
+
+
+def main() -> None:
     lines = get_puzzle_lines()
     parts = defaultdict(list)
-    special_chars = {
-        (r, c)
-        for r, c in itertools.product(range(len(lines)), range(len(lines)))
-        if lines[r][c] not in "01234566789."
-    }
+    special_chars = get_special_chars(lines)
 
     for index, line in enumerate(lines):
         for n in re.finditer(r"\d+", line):
