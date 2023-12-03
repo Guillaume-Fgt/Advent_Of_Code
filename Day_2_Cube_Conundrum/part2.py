@@ -1,7 +1,7 @@
 import functools
 import re
 
-PUZZLE_FILENAME = "Day_2_Cube Conundrum/puzzle_input.txt"
+PUZZLE_FILENAME = "Day_2_Cube_Conundrum/puzzle_input.txt"
 MAX = {"red": 12, "green": 13, "blue": 14}
 
 
