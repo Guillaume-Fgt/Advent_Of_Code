@@ -18,7 +18,6 @@ def main() -> None:
         dict_conv[title] = {}
         for value in values:
             dest, source, ran_len = value.split()
-            print(dest)
             for x, y in zip(
                 range(int(source), int(source) + int(ran_len)),
                 range(int(dest), int(dest) + int(ran_len)),
