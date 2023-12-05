@@ -11,11 +11,11 @@ def get_puzzle_lines() -> str:
 
 def main() -> None:
     seed_input, *to_maps = get_puzzle_lines().split("\n\n")
-    inputs = list(map(int, seed_input.split(":")[1].split()))
+    inputs = tuple(map(int, seed_input.split(":")[1].split()))
     seeds = [(x, x + y) for x, y in itertools.batched(inputs, 2)]
 
     for elem in to_maps:
-        maps = [list(map(int, line.split())) for line in elem.splitlines()[1:]]
+        maps = [tuple(map(int, line.split())) for line in elem.splitlines()[1:]]
         new = []
         while len(seeds) > 0:
             s, e = seeds.pop()
