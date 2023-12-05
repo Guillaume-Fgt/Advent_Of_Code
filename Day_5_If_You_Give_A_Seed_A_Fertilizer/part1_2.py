@@ -10,8 +10,8 @@ def get_puzzle_lines() -> str:
 
 
 def main() -> None:
-    inputs, *to_maps = get_puzzle_lines().split("\n\n")
-    inputs = list(map(int, inputs.split(":")[1].split()))
+    seed_input, *to_maps = get_puzzle_lines().split("\n\n")
+    inputs = list(map(int, seed_input.split(":")[1].split()))
     seeds = [(x, x + y) for x, y in itertools.batched(inputs, 2)]
 
     for elem in to_maps:
@@ -22,16 +22,16 @@ def main() -> None:
             for a, b, c in maps:
                 os = max(s, b)
                 oe = min(e, b + c)
-                if not os < oe:
+                if not os < oe:  # no overlapping
                     continue
                 new.append((os - b + a, oe - b + a))
                 if os > s:
-                    seeds.append((s, os))
+                    seeds.append((s, os))  # not overlapped parts sent back to seeds
                 if e > oe:
-                    seeds.append((oe, e))
+                    seeds.append((oe, e))  # same here
                 break
             else:
-                new.append((s, e))
+                new.append((s, e))  # seed outside of all maps. Kept unchanged
         seeds = new
 
     print(min(seeds)[0])
