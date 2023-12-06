@@ -27,9 +27,7 @@ def main() -> None:
     for time, distance in data:
         win_race = 0
         for hold in range(time):
-            boat_speed = hold
-            dist_made = (time - hold) * boat_speed
-            if dist_made > distance:
+            if (time - hold) * hold > distance:
                 win_race += 1
         wins.append(win_race)
 
