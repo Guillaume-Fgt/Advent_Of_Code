@@ -2,6 +2,7 @@ import functools
 import operator
 import re
 from pathlib import Path
+from time import perf_counter
 
 PUZZLE_FILENAME = "Day_6/puzzle_input.txt"
 
@@ -12,6 +13,7 @@ def get_puzzle_lines() -> list[str]:
 
 
 def main() -> None:
+    time1 = perf_counter()
     lines = get_puzzle_lines()
     data = tuple(
         (
@@ -31,8 +33,8 @@ def main() -> None:
                 win_race += 1
         wins.append(win_race)
 
-    print(wins)
     print(functools.reduce(operator.mul, wins))
+    print(f"time elapsed: {perf_counter()-time1}")
 
 
 if __name__ == "__main__":
