@@ -26,9 +26,10 @@ def main() -> None:
     wins = []
     for time, distance in data:
         win_race = 0
-        for hold in range(time):
+        for hold in range(time // 2):
             if (time - hold) * hold > distance:
-                win_race += 1
+                win_race = (time + 1) - hold * 2
+                break
         wins.append(win_race)
 
     print(functools.reduce(operator.mul, wins))
