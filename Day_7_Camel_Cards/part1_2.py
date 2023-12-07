@@ -10,18 +10,18 @@ def get_puzzle_lines() -> list[str]:
 
 
 CARDS = ("J", "2", "3", "4", "5", "6", "7", "8", "9", "T", "Q", "K", "A")
-HAND_TYPE: dict[tuple[int, ...], tuple[str, int]] = {
-    (1, 1, 1, 1, 1): ("High card", 0),
-    (2, 1, 1, 1): ("One pair", 1),
-    (2, 2, 1): ("Two pair", 2),
-    (3, 1, 1): ("Three of a kind", 3),
-    (3, 2): ("Full house", 4),
-    (4, 1): ("Four of a kind", 5),
-    (5,): ("Five of a kind", 6),
+HAND_TYPE: dict[tuple[int, ...], tuple[str, str]] = {
+    (1, 1, 1, 1, 1): ("High card", "0"),
+    (2, 1, 1, 1): ("One pair", "1"),
+    (2, 2, 1): ("Two pair", "2"),
+    (3, 1, 1): ("Three of a kind", "3"),
+    (3, 2): ("Full house", "4"),
+    (4, 1): ("Four of a kind", "5"),
+    (5,): ("Five of a kind", "6"),
 }
 
 
-def get_hand_type(hand: str) -> tuple[str, int]:
+def get_hand_type(hand: str) -> tuple[str, str]:
     count = Counter(hand)
     if "J" in hand:
         if hand.count("J") == len(hand):
@@ -37,14 +37,16 @@ def get_hand_type(hand: str) -> tuple[str, int]:
 
 
 def order_hands(hand: list[str]) -> tuple[str, list[int]]:
-    return (hand[2][1], [CARDS.index(card) for card in hand[0]])
+    return (hand[3], [CARDS.index(card) for card in hand[0]])
 
 
 def main() -> None:
     lines = get_puzzle_lines()
     hands = [line.split() for line in lines]
     for hand in hands:
-        hand.append(get_hand_type(hand[0]))
+        hand_type = get_hand_type(hand[0])
+        hand.extend(hand_type)
+    print(hands)
     hands.sort(key=lambda x: order_hands(x))
     print(sum([int(x[1]) * (hands.index(x) + 1) for x in hands]))
 
