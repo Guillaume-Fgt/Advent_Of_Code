@@ -10,7 +10,7 @@ def get_puzzle_lines() -> list[str]:
 
 
 CARDS = ("J", "2", "3", "4", "5", "6", "7", "8", "9", "T", "Q", "K", "A")
-HAND_TYPE = {
+HAND_TYPE: dict[tuple[int, ...], tuple[str, int]] = {
     (1, 1, 1, 1, 1): ("High card", 0),
     (2, 1, 1, 1): ("One pair", 1),
     (2, 2, 1): ("Two pair", 2),
@@ -21,16 +21,13 @@ HAND_TYPE = {
 }
 
 
-def get_hand_type(hand: str) -> str:
+def get_hand_type(hand: str) -> tuple[str, int]:
     count = Counter(hand)
     if "J" in hand:
-        if hand.count("J") == 5:
+        if hand.count("J") == len(hand):
             return HAND_TYPE[(5,)]
-        key_to_up = (
-            count.most_common(1)[0][0]
-            if count.most_common(1)[0][0] != "J"
-            else count.most_common(2)[1][0]
-        )
+        most_com_1, most_com_2 = (x[0] for x in count.most_common(2))
+        key_to_up = most_com_1 if most_com_1 != "J" else most_com_2
         d = Counter(
             {"J": -count["J"], key_to_up: count["J"]},
         )
