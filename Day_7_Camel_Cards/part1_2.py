@@ -1,7 +1,7 @@
 from collections import Counter
 from pathlib import Path
 
-PUZZLE_FILENAME = "Day_7/puzzle_input.txt"
+PUZZLE_FILENAME = "Day_7_Camel_Cards/puzzle_input.txt"
 
 
 def get_puzzle_lines() -> list[str]:
@@ -48,9 +48,7 @@ def main() -> None:
     hands = [line.split() for line in lines]
     for hand in hands:
         hand.append(get_hand_type(hand[0]))
-    # hands.sort(key=lambda x: x[2][1])
     hands.sort(key=lambda x: order_hands(x))
-
     print(sum([int(x[1]) * (hands.index(x) + 1) for x in hands]))
 
 
