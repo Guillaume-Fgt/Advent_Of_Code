@@ -1,7 +1,7 @@
 import itertools
 from pathlib import Path
 
-PUZZLE_FILENAME = "Day_9/puzzle_input.txt"
+PUZZLE_FILENAME = "Day_9_Mirage_Maintenance/puzzle_input.txt"
 
 
 def get_puzzle_lines() -> list[str]:
@@ -25,11 +25,11 @@ def main() -> None:
     for v in diff_per_step:
         previous_elem = 0
         for elem in reversed(v):
-            elem.append(previous_elem + elem[-1])
-            previous_elem = elem[-1]
+            elem.insert(0, elem[0] - previous_elem)
+            previous_elem = elem[0]
     print(diff_per_step)
 
-    print(sum([x[0][-1] for x in diff_per_step]))
+    print(sum([x[0][0] for x in diff_per_step]))
 
 
 if __name__ == "__main__":

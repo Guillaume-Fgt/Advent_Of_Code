@@ -1,3 +1,5 @@
 .venv/
 Day_3_Gear_Ratios/__pycache__/
 .vscode/
+**/puzzle_input.txt
+**/example.txt
