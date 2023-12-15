@@ -16,7 +16,7 @@ for step in seq:
         label *= 17
         label = label % 256
 
-    if op == "-" and not num:
+    if op == "-":
         for v in boxes[label]:
             if v.startswith(letter):
                 boxes[label].remove(v)
