@@ -15,8 +15,7 @@ for step in seq:
         label += ord(char)
         label *= 17
         label = label % 256
-    if op == "-" and f"{letter} {num}" in boxes[label]:
-        boxes[label].remove(f"{letter} {num}")
+
     if op == "-" and not num:
         for v in boxes[label]:
             if v.startswith(letter):
