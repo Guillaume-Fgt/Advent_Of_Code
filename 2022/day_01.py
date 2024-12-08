@@ -1,3 +1,5 @@
+import heapq
+
 import aoc_lube
 
 RAW = aoc_lube.fetch(year=2022, day=1)
@@ -15,9 +17,7 @@ def part_one() -> int:
 
 
 def part_two() -> int:
-    cal_list = [sum(cals) for cals in DATA]
-    cal_list.sort(reverse=True)
-    return sum(cal_list[:3])
+    return sum(heapq.nlargest(3, [sum(cals) for cals in DATA]))
 
 
 aoc_lube.submit(year=2022, day=1, part=1, solution=part_one)
