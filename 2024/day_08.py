@@ -35,10 +35,9 @@ def part_one():
 def part_two():
     h, w = len(RAW), len(RAW[0])
     frequencies = defaultdict(list)
-    for r in range(h):
-        for c in range(w):
-            if (char := RAW[r][c]) != ".":
-                frequencies[char].append((r, c))
+    for r, c in itertools.product(range(h), range(w)):
+        if (char := RAW[r][c]) != ".":
+            frequencies[char].append((r, c))
 
     antinodes = []
     for freq in frequencies.values():
@@ -62,4 +61,4 @@ def part_two():
 print(part_two())
 
 # aoc_lube.submit(year=2024, day=8, part=1, solution=part_one)
-aoc_lube.submit(year=2024, day=8, part=2, solution=part_two)
+# aoc_lube.submit(year=2024, day=8, part=2, solution=part_two)
